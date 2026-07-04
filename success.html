@@ -30,6 +30,14 @@
             0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -48,27 +56,33 @@
 
         <div class="content" style="background: #1a1a2e; border-radius: 0 0 16px 16px; padding: 24px; text-align: center;">
 
-            <div style="font-size: 80px; margin-bottom: 8px;">🏆</div>
+            <div style="font-size: 80px; margin-bottom: 8px;" class="pulse">🏆</div>
             <h2 style="color: #ffd700; font-size: 32px; font-weight: 900;">10GB + ₦5,000</h2>
             <p style="color: rgba(255,255,255,0.4); font-size: 14px;">Data & Airtime Package</p>
 
+            <!-- ===== ACTIVATION CODE ===== -->
             <div style="background: rgba(255,215,0,0.05); border-radius: 12px; padding: 16px; margin: 16px 0; border: 1px solid rgba(255,215,0,0.08);">
                 <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px;">
                     <span style="color: rgba(255,255,255,0.4);">Activation Code</span>
-                    <span style="color: #ffd700; font-weight: 700; font-family: monospace; font-size: 16px; letter-spacing: 2px;">
-                        LUMINA-<span id="activationCode"><?php echo rand(100000, 999999); ?></span>
+                    <span style="color: #ffd700; font-weight: 700; font-family: monospace; font-size: 18px; letter-spacing: 2px;">
+                        LUMINA-<span id="activationCode"></span>
                     </span>
                 </div>
                 <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.04);">
                     <span style="color: rgba(255,255,255,0.4);">Valid Until</span>
-                    <span style="color: #fff;"><?php echo date('d M Y', strtotime('+7 days')); ?></span>
+                    <span style="color: #fff;" id="validUntil"></span>
                 </div>
                 <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.04);">
                     <span style="color: rgba(255,255,255,0.4);">Status</span>
                     <span style="color: #27ae60; font-weight: 600;"><i class="fas fa-check-circle"></i> Active</span>
                 </div>
+                <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.04);">
+                    <span style="color: rgba(255,255,255,0.4);">Network</span>
+                    <span style="color: #fff;" id="displayNetwork">MTN</span>
+                </div>
             </div>
 
+            <!-- ===== ACTIVATE BUTTONS ===== -->
             <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 16px;">
                 <button class="btn btn-primary btn-glow" id="activateDataBtn" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <i class="fas fa-wifi"></i> Activate 10GB Now
@@ -78,11 +92,12 @@
                 </button>
             </div>
 
+            <!-- ===== SHARE ===== -->
             <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.04);">
                 <p style="color: rgba(255,255,255,0.2); font-size: 12px;">
                     <i class="fas fa-share-alt"></i> Share with friends to keep your reward active
                 </p>
-                <div style="display: flex; justify-content: center; gap: 12px; margin-top: 8px;">
+                <div style="display: flex; justify-content: center; gap: 12px; margin-top: 8px; flex-wrap: wrap;">
                     <button class="btn btn-success" id="shareWhatsApp" style="width: auto; padding: 10px 20px; font-size: 14px;">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </button>
@@ -95,6 +110,7 @@
                 </div>
             </div>
 
+            <!-- ===== BACK ===== -->
             <div style="margin-top: 16px;">
                 <a href="index.html" style="color: rgba(255,255,255,0.2); font-size: 12px; text-decoration: none;">
                     <i class="fas fa-arrow-left"></i> Back to Home
@@ -107,8 +123,8 @@
         // ===== CONFETTI =====
         (function() {
             const container = document.getElementById('confettiContainer');
-            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff9ff3', '#54a0ff', '#5f27cd'];
-            for (let i = 0; i < 100; i++) {
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff9ff3', '#54a0ff', '#5f27cd', '#2ecc71'];
+            for (let i = 0; i < 120; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
@@ -123,7 +139,19 @@
             setTimeout(() => { container.innerHTML = ''; }, 5000);
         })();
 
-        // ===== BUTTONS =====
+        // ===== GENERATE ACTIVATION CODE =====
+        document.getElementById('activationCode').textContent = Math.floor(100000 + Math.random() * 900000);
+        
+        // ===== VALID UNTIL =====
+        const date = new Date();
+        date.setDate(date.getDate() + 7);
+        document.getElementById('validUntil').textContent = date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+
+        // ===== GET NETWORK =====
+        const network = localStorage.getItem('lumina_network') || 'MTN';
+        document.getElementById('displayNetwork').textContent = network.toUpperCase();
+
+        // ===== ACTIVATE BUTTONS =====
         document.getElementById('activateDataBtn').addEventListener('click', function() {
             window.open('https://omg10.com/4/11169333', '_blank');
         });
@@ -132,17 +160,19 @@
             window.open('https://omg10.com/4/11169333', '_blank');
         });
 
+        // ===== SHARE =====
+        const shareText = encodeURIComponent(
+            '🎉 I just won 10GB + ₦5,000 from Lumina Home! It\'s real! Join me and claim yours: 👇\n' +
+            window.location.origin + '/index.html'
+        );
+
         document.getElementById('shareWhatsApp').addEventListener('click', function() {
-            const text = encodeURIComponent(
-                '🎉 I just won 10GB + ₦5,000 from Lumina Home! It\'s real! Join me and claim yours: 👇\n' +
-                window.location.origin + '/index.html'
-            );
-            window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
+            window.open('https://api.whatsapp.com/send?text=' + shareText, '_blank');
         });
 
         document.getElementById('shareTwitter').addEventListener('click', function() {
-            const text = encodeURIComponent('🎉 I just won 10GB + ₦5,000 from Lumina Home! It\'s real! Join me and claim yours: ');
-            window.open('https://twitter.com/intent/tweet?text=' + text + window.location.origin + '/index.html', '_blank');
+            const tweetText = encodeURIComponent('🎉 I just won 10GB + ₦5,000 from Lumina Home! It\'s real! Join me: ');
+            window.open('https://twitter.com/intent/tweet?text=' + tweetText + window.location.origin + '/index.html', '_blank');
         });
 
         document.getElementById('shareFacebook').addEventListener('click', function() {
